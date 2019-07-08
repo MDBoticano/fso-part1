@@ -9,22 +9,28 @@ const Button = ({clickHandler, text}) => {
 
 const Statistics = ({stats}) => {
   const allStats = stats.good + stats.neutral + stats.bad;
-  const avgStats = (stats.good + (-1)*stats.bad) / allStats;
-  const positiveStats = (stats.good/allStats * 100 + '%');
+  const avgStats = (stats.good + 0*stats.neutral + -1*stats.bad) / allStats;
+  const positiveStats = (stats.good/allStats * 100 + ' %');
 
+  const statsList = [
+    { text: 'good', value: stats.good },
+    { text: 'neutral', value: stats.neutral },
+    { text: 'bad', value: stats.bad },
+    { text: 'all', value: allStats },
+    { text: 'average', value: avgStats },
+    { text: 'positive', value: positiveStats }
+  ]
+  
   if (allStats === 0 ) {
     return ( <p>No feedback given</p> )
   } 
 
   return(
-    <>
-      <Statistic value={stats.good} text='good' />
-      <Statistic value={stats.neutral} text='neutral' />
-      <Statistic value={stats.bad} text='bad' />
-      <Statistic value={allStats} text='all' />
-      <Statistic value={avgStats} text='average' />
-      <Statistic value={positiveStats} text='positive' />
-    </>
+    <div>
+      {statsList.map((obj, index) => 
+        <Statistic value={obj.value}  text={obj.text} key={index}/>
+      )}
+    </div>
   )
 }
 
