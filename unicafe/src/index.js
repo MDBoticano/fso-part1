@@ -24,17 +24,17 @@ const Statistics = ({stats}) => {
   return(
     <>
       <h2>statistics</h2>
-      <Stat value={stats.good} text='good' />
-      <Stat value={stats.neutral} text='neutral' />
-      <Stat value={stats.bad} text='bad' />
-      <Stat value={allStats} text='all' />
-      <Stat value={avgStats} text='average' />
-      <Stat value={positiveStats} text='positive' />
+      <Statistic value={stats.good} text='good' />
+      <Statistic value={stats.neutral} text='neutral' />
+      <Statistic value={stats.bad} text='bad' />
+      <Statistic value={allStats} text='all' />
+      <Statistic value={avgStats} text='average' />
+      <Statistic value={positiveStats} text='positive' />
     </>
   )
 }
 
-const Stat = ({text, value}) => {
+const Statistic = ({text, value}) => {
   return (
     <p>{text} {value}</p>
   )
