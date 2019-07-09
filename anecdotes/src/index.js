@@ -1,12 +1,24 @@
 import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
-const MostVotes = ({ votes, anecdotes }) => {
+const DayAnecdote = ({ selected, anecdotes, votes }) => {
+  return (
+    <>
+      <h1>Anecdote of the day</h1>
+      {anecdotes[selected]}
+      <div>
+        has {votes[selected]} votes
+      </div>
+    </>
+  )
+}
+
+const MostVotes = ({ anecdotes, votes }) => {
   const indexOfMostVotes = votes.indexOf(Math.max(...votes));
   const maxVotes = (Math.max(...votes));
   // console.log('Most votes:', indexOfMostVotes);
   // console.log(anecdotes[indexOfMostVotes]);
-  
+
   return (
     <div>
       <h1>Anecdote with most votes</h1>
@@ -41,16 +53,12 @@ const App = (props) => {
 
   return (
     <div>
-      <h1>Anecdote of the day</h1>
-      {props.anecdotes[selected]}
-      <div>
-        has {votes[selected]} votes
-      </div>
+      <DayAnecdote selected={selected} votes={votes} anecdotes={anecdotes} />
       <div>
         <button onClick={updateVote}>Vote</button>
         <button onClick={generateRandomIndex}>next anecdote</button>
       </div>
-      <MostVotes votes={votes} anecdotes={props.anecdotes}/>
+      <MostVotes votes={votes} anecdotes={props.anecdotes} />
     </div>
   )
 }
