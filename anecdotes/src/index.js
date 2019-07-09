@@ -2,21 +2,37 @@ import React, { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const App = (props) => {
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(0);
 
-  // Generate a random number from anecdotes size
-  const generateRandom = () => {
-    const anecdotesLength = props.anecdotes.length;
+  const anecdotesLength = props.anecdotes.length;
+  const emptyArray = Array.from(Array(anecdotesLength), () => 0);
+
+  const [votes, setVotes] = useState(emptyArray);
+
+
+
+  const generateRandomIndex = () => {
     let randomIndex = Math.floor(Math.random() * anecdotesLength);
     console.log(randomIndex);
     setSelected(randomIndex);
+  }
+
+  const updateVote = () => {
+    let votesArray = [...votes];
+    votesArray[selected] = votesArray[selected] + 1;
+    console.log(votesArray);
+    setVotes(votesArray);
   }
 
   return (
     <div>
       {props.anecdotes[selected]}
       <div>
-        <button onClick={generateRandom}>next anecdote</button>
+        has {votes[selected]} votes
+      </div>
+      <div>
+        <button onClick={updateVote}>Vote</button>
+        <button onClick={generateRandomIndex}>next anecdote</button>
       </div>
     </div>
   )
