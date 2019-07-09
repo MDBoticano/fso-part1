@@ -4,9 +4,20 @@ import ReactDOM from 'react-dom'
 const App = (props) => {
   const [selected, setSelected] = useState(0)
 
+  // Generate a random number from anecdotes size
+  const generateRandom = () => {
+    const anecdotesLength = props.anecdotes.length;
+    let randomIndex = Math.floor(Math.random() * anecdotesLength);
+    console.log(randomIndex);
+    setSelected(randomIndex);
+  }
+
   return (
     <div>
       {props.anecdotes[selected]}
+      <div>
+        <button onClick={generateRandom}>next anecdote</button>
+      </div>
     </div>
   )
 }
@@ -20,7 +31,4 @@ const anecdotes = [
   'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
 ]
 
-ReactDOM.render(
-  <App anecdotes={anecdotes} />,
-  document.getElementById('root')
-)
+ReactDOM.render(<App anecdotes={anecdotes} />, document.getElementById('root'));
